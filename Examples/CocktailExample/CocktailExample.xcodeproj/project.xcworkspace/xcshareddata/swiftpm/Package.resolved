@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "swift-async-expectations",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bangerang/swift-async-expectations.git",
+      "state" : {
+        "revision" : "016a5e6e295f5458e6fd01ee404757d9ca339613",
+        "version" : "0.0.1"
+      }
+    },
+    {
+      "identity" : "swift-custom-dump",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/swift-custom-dump",
+      "state" : {
+        "revision" : "84b30e1af72e0ffe6dfbfe39d53b8173caacf224",
+        "version" : "0.10.2"
+      }
+    },
+    {
+      "identity" : "xctest-dynamic-overlay",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pointfreeco/xctest-dynamic-overlay",
+      "state" : {
+        "revision" : "ab8c9f45843694dd16be4297e6d44c0634fd9913",
+        "version" : "0.8.4"
+      }
+    }
+  ],
+  "version" : 2
+}
