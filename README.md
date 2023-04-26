@@ -169,7 +169,7 @@ class ViewController: UIViewController {
 
 ## Namespacing
 
-If the global namespace is not your thing, you can always create static let properties like this for scoping.
+If the global namespace is not your thing, you can always create static let properties for scoping.
 
 ```swift
 enum MyAtoms {
@@ -187,13 +187,13 @@ enum MyAtoms {
 
 ## Debugging
 
-Atoms provides built-in debugging support to help you track state changes. Use the `enableAtomLogging` method on a `View` or directly through the `AtomStore` to enable logging.
+Atoms provides built-in debugging support to help you track state changes. Use the `enableAtomLogging` method on a `View`.
 
 ```swift
 Text("Hello, World!")
     .enableAtomLogging()
 ```
-
+Or directly through the `AtomStore`.
 ```swift
 AtomStore.shared.enableAtomLogging(debugScope: .include([counterAtom]))
 ```
@@ -210,6 +210,14 @@ let someAtom = DerivedAtom {
 }
 ```
 
+## Examples
+- [Todo App](https://github.com/bangerang/swift-atoms/tree/main/Examples/TodoExample)
+- [Simple signup](https://github.com/bangerang/swift-atoms/tree/main/Examples/SignupExample)
+- [Search and favorite cocktails](https://github.com/bangerang/swift-atoms/tree/main/Examples/CocktailExample)
+
+## Documentation
+Can be found [here](https://bangerang.github.io/swift-atoms/documentation/atoms/)
+
 ## Installation
 
 ### Swift Package Manager
@@ -222,7 +230,7 @@ let someAtom = DerivedAtom {
 
 ### Testing installation
 
-To make writing unit tests for **Atoms** even easier, the library comes bundled with [AsyncExpectations](https://github.com/bangerang/swift-async-expectations), which is exported through the `AtomsTesting` library. To use `AtomsTesting` in your test target, make sur you add `AtomsTesting` to your test target.
+To make writing unit tests for **Atoms** even easier, the library comes bundled with [AsyncExpectations](https://github.com/bangerang/swift-async-expectations), which is exported through the `AtomsTesting` library. To use `AtomsTesting` in your test target, make sure you add `AtomsTesting` to your test target.
 
 ![TestScreenshot](Resources/TestScreenshot.png)
 
@@ -233,25 +241,16 @@ func testExample() async throws {
     let expectation = expectation(description: #function)
     await TestStore { store in
         store.inject(textAtom) {
-	        "Foo"
+            "Foo"
         }
-
+        
         textAtom.onUpdate { newValue in
-	        if newValue == "Foo" {
-	            expectation.fulfill()
-	        }
+            if newValue == "Foo" {
+                expectation.fulfill()
+            }
         }
         @CaptureAtomValue(textAtom) var text: String
     }
     wait(for: [expectation], timeout: 1)
 }
 ```
-
-## Examples
-- [Todo App](https://github.com/bangerang/swift-atoms/tree/main/Examples/TodoExample)
-- [Simple signup](https://github.com/bangerang/swift-atoms/tree/main/Examples/SignupExample)
-- [Search and favorite cocktails](https://github.com/bangerang/swift-atoms/tree/main/Examples/CocktailExample)
-
-## Documentation
-Can be found [here](https://bangerang.github.io/swift-atoms/documentation/atoms/)
-
