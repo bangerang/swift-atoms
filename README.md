@@ -30,13 +30,11 @@ struct ContentView: View {
 }
 ```
 
-## **Motivation**
+## Motivation
 
-While SwiftUI offers great built-in property wrappers for data-binding, it can become cumbersome and less efficient when building medium to large-scale production apps.
-
-In traditional SwiftUI state management, sharing view data involves pushing it up to a common parent, which can lead to performance degradation and difficulties in code splitting. Additionally, using EnvironmentObjects to pass data down the view hierarchy can cause unnecessary re-rendering and performance issues in large applications.
-
-**Atoms** was designed to overcome these challenges by offering a more efficient and flexible solution, while seamlessly integrating into the SwiftUI ecosystem. The library enables the creation of modular units for application data, which can be shared across the app as a single source of truth. This approach not only eliminates state-drilling but also ensures that only components with updated state are re-rendered.
+SwiftUI provides great built-in support for handling state, but its object-oriented approach can make code splitting challenging. That's where **Atoms** can help.
+ 
+**Atoms** provide a more granular level of state management, allowing you to focus on what you need without worrying about where to put things. By avoiding large observable objects with many published properties, **Atoms** help you steer clear of performance bottlenecks due to rendering, while maintaining a single source of truth in your app's architecture.
 
 ## Overview
 
