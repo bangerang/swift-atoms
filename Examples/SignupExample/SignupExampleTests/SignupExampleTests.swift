@@ -1,6 +1,5 @@
 import XCTest
 @testable import SignupExample
-import AtomsTesting
 import Atoms
 
 final class SignupExampleTests: XCTestCase {

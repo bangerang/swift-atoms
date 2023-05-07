@@ -1,6 +1,5 @@
 import XCTest
 @testable import Atoms
-import AsyncExpectations
 import Combine
 
 final class swift_atomsTests: XCTestCase {

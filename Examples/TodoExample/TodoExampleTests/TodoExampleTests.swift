@@ -7,7 +7,6 @@
 
 import XCTest
 @testable import TodoExample
-import AtomsTesting
 import Atoms
 
 final class TodoExampleTests: XCTestCase {

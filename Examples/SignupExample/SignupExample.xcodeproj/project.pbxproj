@@ -14,8 +14,6 @@
 		AB39745B29ED78F9003ABB08 /* Atoms in Frameworks */ = {isa = PBXBuildFile; productRef = AB39745A29ED78F9003ABB08 /* Atoms */; };
 		AB39745D29ED790F003ABB08 /* Atoms.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39745C29ED790F003ABB08 /* Atoms.swift */; };
 		AB39746529ED797D003ABB08 /* SignupExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB39746429ED797D003ABB08 /* SignupExampleTests.swift */; };
-		AB39746C29ED79FE003ABB08 /* AtomsTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB39746B29ED79FE003ABB08 /* AtomsTesting */; };
-		AB39746E29ED79FE003ABB08 /* AtomsTesting in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AB39746B29ED79FE003ABB08 /* AtomsTesting */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +33,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AB39746E29ED79FE003ABB08 /* AtomsTesting in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,7 +64,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB39746C29ED79FE003ABB08 /* AtomsTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +172,6 @@
 			);
 			name = SignupExampleTests;
 			packageProductDependencies = (
-				AB39746B29ED79FE003ABB08 /* AtomsTesting */,
 			);
 			productName = SignupExampleTests;
 			productReference = AB39746229ED797D003ABB08 /* SignupExampleTests.xctest */;
@@ -513,10 +508,6 @@
 		AB39745A29ED78F9003ABB08 /* Atoms */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Atoms;
-		};
-		AB39746B29ED79FE003ABB08 /* AtomsTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AtomsTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

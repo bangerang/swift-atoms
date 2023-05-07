@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/bangerang/swift-async-expectations.git",
       "state" : {
-        "revision" : "016a5e6e295f5458e6fd01ee404757d9ca339613",
-        "version" : "0.0.1"
+        "revision" : "1f65a7dcc7810eb4e5108e007dcfc03466aac0e8",
+        "version" : "0.1.0"
       }
     },
     {

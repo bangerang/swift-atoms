@@ -6,7 +6,6 @@
 //
 
 import XCTest
-import AtomsTesting
 @testable import CocktailExample
 import Atoms
 

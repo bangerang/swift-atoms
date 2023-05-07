@@ -17,8 +17,6 @@
 		AB30B9D529ED885900E4E2E3 /* TodoItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB30B9D429ED885900E4E2E3 /* TodoItemView.swift */; };
 		AB30B9D729ED886D00E4E2E3 /* NewTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB30B9D629ED886D00E4E2E3 /* NewTodoView.swift */; };
 		AB30B9DF29ED91F500E4E2E3 /* TodoExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB30B9DE29ED91F500E4E2E3 /* TodoExampleTests.swift */; };
-		AB30B9E629ED91FF00E4E2E3 /* AtomsTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB30B9E529ED91FF00E4E2E3 /* AtomsTesting */; };
-		AB30B9E829ED91FF00E4E2E3 /* AtomsTesting in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AB30B9E529ED91FF00E4E2E3 /* AtomsTesting */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,7 +36,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AB30B9E829ED91FF00E4E2E3 /* AtomsTesting in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -73,7 +70,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB30B9E629ED91FF00E4E2E3 /* AtomsTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -185,7 +181,6 @@
 			);
 			name = TodoExampleTests;
 			packageProductDependencies = (
-				AB30B9E529ED91FF00E4E2E3 /* AtomsTesting */,
 			);
 			productName = TodoExampleTests;
 			productReference = AB30B9DC29ED91F500E4E2E3 /* TodoExampleTests.xctest */;
@@ -525,10 +520,6 @@
 		AB30B9CE29ED87E200E4E2E3 /* Atoms */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Atoms;
-		};
-		AB30B9E529ED91FF00E4E2E3 /* AtomsTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AtomsTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

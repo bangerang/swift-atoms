@@ -18,8 +18,6 @@
 		AB1260FB29ED6B6F00E7BDCD /* CocktaiItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1260FA29ED6B6F00E7BDCD /* CocktaiItemView.swift */; };
 		AB1260FD29ED6BAE00E7BDCD /* CocktailImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB1260FC29ED6BAE00E7BDCD /* CocktailImageView.swift */; };
 		AB578F6F29ED6F3C00B45B1A /* CocktailExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB578F6E29ED6F3C00B45B1A /* CocktailExampleTests.swift */; };
-		AB578F7629ED6F4800B45B1A /* AtomsTesting in Frameworks */ = {isa = PBXBuildFile; productRef = AB578F7529ED6F4800B45B1A /* AtomsTesting */; };
-		AB578F7829ED6F4800B45B1A /* AtomsTesting in Embed Frameworks */ = {isa = PBXBuildFile; productRef = AB578F7529ED6F4800B45B1A /* AtomsTesting */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +37,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				AB578F7829ED6F4800B45B1A /* AtomsTesting in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -75,7 +72,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB578F7629ED6F4800B45B1A /* AtomsTesting in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +184,6 @@
 			);
 			name = CocktailExampleTests;
 			packageProductDependencies = (
-				AB578F7529ED6F4800B45B1A /* AtomsTesting */,
 			);
 			productName = CocktailExampleTests;
 			productReference = AB578F6C29ED6F3C00B45B1A /* CocktailExampleTests.xctest */;
@@ -529,10 +524,6 @@
 		AB1260F229ED6A8E00E7BDCD /* Atoms */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Atoms;
-		};
-		AB578F7529ED6F4800B45B1A /* AtomsTesting */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AtomsTesting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
