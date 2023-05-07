@@ -1,4 +1,4 @@
-# Atoms
+Atoms
 
 **Atoms** is a powerful and flexible atomic state management library for Swift, designed to create compact, independent global state components with seamless adaptability and composition.
 
@@ -33,7 +33,7 @@ struct ContentView: View {
 ## Motivation
 
 SwiftUI provides great built-in support for handling state, but its object-oriented approach can make code splitting challenging. That's where **Atoms** can help.
- 
+
 **Atoms** provide a more granular level of state management, allowing you to focus on what you need without worrying about where to put things. By avoiding large observable objects with many published properties, **Atoms** help you steer clear of performance bottlenecks due to rendering, while maintaining a single source of truth in your app's architecture.
 
 ## Overview
@@ -181,8 +181,6 @@ enum MyAtoms {
 }
 ```
 
-
-
 ## Debugging
 
 Atoms provides built-in debugging support to help you track state changes. Use the `enableAtomLogging` method on a `View`.
@@ -198,7 +196,7 @@ AtomStore.shared.enableAtomLogging(debugScope: .include([counterAtom]))
 
 ## Known Issues
 
-Using property wrappers inline without a following keyword will lead to a compiler error. Hopefully this will be fixed in future Swift versions. The workaround for now is to either add a semicolon or explicitlly state the type.
+Using property wrappers inline without a following keyword will lead to a compiler error in Xcode < 14.3. The workaround is to either add a semicolon or explicitlly state the type.
 
 ```swift
 let someAtom = DerivedAtom {
@@ -226,29 +224,25 @@ Can be found [here](https://bangerang.github.io/swift-atoms/documentation/atoms/
 4. Click **Add Package**.
 5. Choose the appropriate package options and click **Add Package** again to confirm.
 
-### Testing installation
+## Testing
 
-To make writing unit tests for **Atoms** even easier, the library comes bundled with [AsyncExpectations](https://github.com/bangerang/swift-async-expectations), which is exported through the `AtomsTesting` library. To use `AtomsTesting` in your test target, make sure you add `AtomsTesting` to your test target.
+**Atoms** comes bundled with [**AsyncExpectations**](https://github.com/bangerang/swift-async-expectations), which makes writing asynchronous tests easy. Using the `TestStore` guarantees that your tests run in an isolated context.
 
-![TestScreenshot](Resources/TestScreenshot.png)
-
-While it's recommended to use `AtomsTesting` for a more convenient testing experience with **Atoms**, it is not strictly required. You can still write unit tests for Atoms using XCTExpectations.
 ```swift
 @MainActor
-func testExample() async throws {
-    let expectation = expectation(description: #function)
-    await TestStore { store in
-        store.inject(textAtom) {
-            "Foo"
+func testFilterCompletedTodos() async throws {
+    try await TestStore { store in
+        let firstMock = Todo(name: "Todo1")
+        let secondMock = Todo(name: "Todo2", completed: true)
+        let mock: [Todo] = [firstMock, secondMock]
+        store.inject(todosAtom) {
+            return mock
         }
-        
-        textAtom.onUpdate { newValue in
-            if newValue == "Foo" {
-                expectation.fulfill()
-            }
-        }
-        @CaptureAtomValue(textAtom) var text: String
+        @CaptureAtom(filterTodosOptionAtom) var filterTodosOption: FilterOption
+        @CaptureAtomValue(filteredTodosAtom) var filteredTodos: [Todo]
+        filterTodosOption = .completed
+        try await expectEqual(filteredTodos, [secondMock])
     }
-    wait(for: [expectation], timeout: 1)
 }
 ```
+
