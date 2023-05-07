@@ -1,4 +1,4 @@
-Atoms
+# Atoms
 
 **Atoms** is a powerful and flexible atomic state management library for Swift, designed to create compact, independent global state components with seamless adaptability and composition.
 
@@ -143,44 +143,6 @@ func testDogsSuccess() async throws {
 
 By default, atom values are stored in memory only while they are actively being used. However, it is still possible to keep certain values alive if needed by passing `keepAlive: true` when creating an atom.
 
-## Use with UIKit
-
-**Atoms** can also be used with UIKit in addition to SwiftUI. You can use `@CaptureAtomPublisher` to subscribe to any atom value changes.
-
-```swift
-class ViewController: UIViewController {
-    @CaptureAtomPublisher(searchTextAtom) var searchTextPublisher
-    
-    private let label = UILabel()
-    private var cancellable: AnyCancellable?
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.addSubview(label)
-        cancellable = searchTextPublisher
-            .sink { [weak self] text in
-                self?.label.text = text
-            }
-    }
-}
-```
-
-## Namespacing
-
-If the global namespace is not your thing, you can always create static let properties for scoping.
-
-```swift
-enum MyAtoms {
-    static let atom = Atom("")
-    static let derived = DerivedAtom {
-        @UseAtomValue(atom) var someValue
-        return someValue.filter {
-            $0.isNumber
-        }
-    }
-}
-```
-
 ## Debugging
 
 Atoms provides built-in debugging support to help you track state changes. Use the `enableAtomLogging` method on a `View`.
@@ -193,26 +155,6 @@ Or directly through the `AtomStore`.
 ```swift
 AtomStore.shared.enableAtomLogging(debugScope: .include([counterAtom]))
 ```
-
-## Known Issues
-
-Using property wrappers inline without a following keyword will lead to a compiler error in Xcode < 14.3. The workaround is to either add a semicolon or explicitlly state the type.
-
-```swift
-let someAtom = DerivedAtom {
-    @UseAtomValue(someOtherAtom) var value: String
-    print(value)
-    return "Hello " + value
-}
-```
-
-## Examples
-- [Todo App](https://github.com/bangerang/swift-atoms/tree/main/Examples/TodoExample)
-- [Simple signup](https://github.com/bangerang/swift-atoms/tree/main/Examples/SignupExample)
-- [Search and favorite cocktails](https://github.com/bangerang/swift-atoms/tree/main/Examples/CocktailExample)
-
-## Documentation
-Can be found [here](https://bangerang.github.io/swift-atoms/documentation/atoms/)
 
 ## Installation
 
@@ -246,3 +188,115 @@ func testFilterCompletedTodos() async throws {
 }
 ```
 
+## Examples
+- [Todo App](https://github.com/bangerang/swift-atoms/tree/main/Examples/TodoExample)
+- [Simple signup](https://github.com/bangerang/swift-atoms/tree/main/Examples/SignupExample)
+- [Search and favorite cocktails](https://github.com/bangerang/swift-atoms/tree/main/Examples/CocktailExample)
+
+## FAQ/Docs
+Many questions can be answered by looking through the  [documentation](https://bangerang.github.io/swift-atoms/documentation/atoms/). Also, feel free to ask questions in the discussions section.
+
+#### Namespacing
+
+If the global namespace is not your thing, you can always create static let properties for scoping.
+
+```swift
+enum MyAtoms {
+    static let atom = Atom("")
+    static let derived = DerivedAtom {
+        @UseAtomValue(atom) var someValue
+        return someValue.filter {
+            $0.isNumber
+        }
+    }
+}
+```
+
+#### Use with UIKit
+
+**Atoms** can also be used with UIKit in addition to SwiftUI. You can use `@CaptureAtomPublisher` to subscribe to any atom value changes.
+
+```swift
+class ViewController: UIViewController {
+    @CaptureAtomPublisher(searchTextAtom) var searchTextPublisher
+    
+    private let label = UILabel()
+    private var cancellable: AnyCancellable?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.addSubview(label)
+        cancellable = searchTextPublisher
+            .sink { [weak self] text in
+                self?.label.text = text
+            }
+    }
+}
+```
+
+#### Known Issues
+
+Using property wrappers inline without a following keyword will lead to a compiler error in Xcode < 14.3. The workaround is to either add a semicolon or explicitlly state the type.
+
+```swift
+let someAtom = DerivedAtom {
+    @UseAtomValue(someOtherAtom) var value: String
+    print(value)
+    return "Hello " + value
+}
+```
+
+#### Scope
+
+Atoms will be in most cases be defined in the global scope. But it is possible to create new atoms on the fly, or use standard SwiftUI conventions such as bindings to avoid this.
+
+Using a binding.
+
+```swift
+let personsAtom = Atom<[Person]>([Person(name: "John", age: 26)])
+
+struct ParentView: View {
+    @UseAtom(personsAtom) var persons
+    var body: some View {
+        List($persons) { $person in
+            PersonView(person: $person)
+        }
+    }
+}
+struct PersonView: View {
+    @Binding var person: Person
+    var body: some View {
+        TextField("Name", text: $person.name)
+    }
+}
+```
+
+Or create a new atom for more control.
+
+```swift
+let personsAtom = Atom<[Person]>([Person(name: "John", age: 26)])
+
+struct ParentView: View {
+    @UseAtom(personsAtom) var persons
+    var body: some View {
+        List(persons) { person in
+            PersonView(personAtom: Atom(person).onUpdate(skip: 1, { newValue in
+                guard let index = persons.firstIndex(where: { $0.id == newValue.id }) else {
+                    return
+                }
+                persons[index] = newValue
+            }))
+        }
+    }
+}
+struct PersonView: View {
+    @UseAtom var person: Person
+    init(personAtom: Atom<Person>) {
+        self._person = UseAtom(personAtom)
+    }
+    
+    var body: some View {
+        TextField("Name", text: $person.name)
+    }
+}
+```
